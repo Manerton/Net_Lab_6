@@ -11,7 +11,6 @@ namespace ServerPart
     public class User
     {
         public string userName { get; set; } = "";
-        private bool currectAuth = false;
 
         private Socket userHandle;
      

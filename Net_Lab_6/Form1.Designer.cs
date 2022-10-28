@@ -163,7 +163,7 @@
             this.InputIP.Name = "InputIP";
             this.InputIP.Size = new System.Drawing.Size(151, 22);
             this.InputIP.TabIndex = 2;
-            this.InputIP.Text = "127.0.0.1";
+            this.InputIP.Text = "26.92.228.180";
             // 
             // InputPort
             // 

@@ -28,7 +28,6 @@ namespace Net_Lab_6
         public Form1()
         {
             InitializeComponent();
-            
             addMessage = new ChatEvent(AddMessage);
         }
 
@@ -160,10 +159,11 @@ namespace Net_Lab_6
 
             ChatListTab.Invoke((MethodInvoker)delegate
             {
+                PrivateChatRadioButton.Enabled = true;
+                EnterChatMessageTextBox.Enabled = true;
+
                 tabPage.Controls.Add(chatTextBox);
                 ChatListTab.TabPages.Add(tabPage);
-                
-                //ChatListTab.TabPages[ChatListTab.SelectedIndex].Controls.Add(chatTextBox);
             });
         }
 
@@ -185,7 +185,6 @@ namespace Net_Lab_6
             }
             else
                 MessageBox.Show("Данное имя уже занято! Измените его","Ошибка");
-                   
         }
 
         //Обработчик полученых сообщений общего чата
@@ -308,7 +307,7 @@ namespace Net_Lab_6
 
         private void SendCreateChat()
         {
-            PrivateChatRadioButton.Enabled = true;
+          
             string usersCreateChat = $"{myName},";
             foreach(var user in UsersListOnForm.CheckedItems)
                 usersCreateChat += user.ToString() + ",";
@@ -327,7 +326,10 @@ namespace Net_Lab_6
                 string id = GetSelectedChatId();
                 List<string> missedMessage = MissedMessagesChats[id];
                 foreach (string message in missedMessage)
-                    ((TextBox)ChatListTab.TabPages[ChatListTab.SelectedIndex].Controls["chatTextBox_" + id]).AppendText(message + "\n");
+                {
+                    ((TextBox)ChatListTab.TabPages[ChatListTab.SelectedIndex].Controls["chatTextBox_" + id]).AppendText(message);
+                    ((TextBox)ChatListTab.TabPages[ChatListTab.SelectedIndex].Controls["chatTextBox_" + id]).AppendText(Environment.NewLine);
+                }
                 MissedMessagesChats[id].Clear();
             });
         }
@@ -336,7 +338,7 @@ namespace Net_Lab_6
         {
             Invoke((MethodInvoker)delegate
             {
-                EnterChatMessageTextBox.Enabled = true;
+                
                 EnterMessageTextBox.Enabled = true;
                 CreateChatButton.Enabled = true;
                 SendFileButton.Enabled = true;
@@ -376,7 +378,7 @@ namespace Net_Lab_6
             }
         }
 
-        private void TakeFile()
+        private void NeedsendFile()
         {
             OpenFileDialog ofp = new OpenFileDialog();
             ofp.ShowDialog();
@@ -392,14 +394,14 @@ namespace Net_Lab_6
             if(PrivateChatRadioButton.Checked)
                 chatID = GetSelectedChatId();
 
-            Send($"#{Types.SETFILETO}|{chatID}|{buffer.Length}|{fi.Name}");//g
+            Send($"#{Types.SETFILETO}|{chatID}|{buffer.Length}|{fi.Name}");
             Send(buffer);
         }
 
 
         private void SendFileButton_Click(object sender, EventArgs e)
         {
-            TakeFile();
+            NeedsendFile();
         }
     }
 }
