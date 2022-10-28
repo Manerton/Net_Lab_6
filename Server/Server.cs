@@ -13,7 +13,7 @@ namespace ServerPart
     public static class Server
     {
         public static int port = 25565;
-        public static string ipAddress = "127.0.0.1";
+        public static string ipAddress = "26.92.228.180";
 
         public static List<MyFile> Files = new List<MyFile>();
         public static List<User> UserList = new List<User>();

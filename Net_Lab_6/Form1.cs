@@ -263,10 +263,14 @@ namespace Net_Lab_6
 
         public void DisableConnectBlock()
         {
-            LogInButton.Enabled = true;
-            InputIP.Enabled = false;
-            InputPort.Enabled = false;
-            ConnectToServerButton.Enabled = false;
+            Invoke((MethodInvoker)delegate
+            {
+                LogInButton.Enabled = true;
+                InputIP.Enabled = false;
+                InputPort.Enabled = false;
+                ConnectToServerButton.Enabled = false;
+            });
+   
         }
 
         public void TryConnectToServer(string ipaddress, int port)
@@ -330,10 +334,13 @@ namespace Net_Lab_6
 
         private void InterfaceActivated()
         {
-            EnterChatMessageTextBox.Enabled = true;
-            EnterMessageTextBox.Enabled = true;
-            CreateChatButton.Enabled = true;
-            SendFileButton.Enabled = true;
+            Invoke((MethodInvoker)delegate
+            {
+                EnterChatMessageTextBox.Enabled = true;
+                EnterMessageTextBox.Enabled = true;
+                CreateChatButton.Enabled = true;
+                SendFileButton.Enabled = true;
+            });
         }
 
         private void EnterChatMessageTextBox_KeyUp(object sender, KeyEventArgs e)
