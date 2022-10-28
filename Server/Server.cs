@@ -76,6 +76,8 @@ namespace ServerPart
         public static void DeleteUser(User user)
         {
             UserList.Remove(user);
+            foreach(var item in ChatList)
+                item.Value.Remove(user);
             user.EndUser();
             UserDisconnected(user.userName);
         }
